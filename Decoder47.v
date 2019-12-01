@@ -1,4 +1,4 @@
-module Decoder47(codeout,indec);
+module Decoder47(codeout,indec);     //4-7译码管 8421码转为七段译码管显示
   input[3:0] indec;
   output[6:0] codeout;
   reg[6:0] codeout;
