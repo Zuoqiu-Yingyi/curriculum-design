@@ -1,11 +1,11 @@
 module timer (
    input CP,         	//时钟信号
    input CE,         	//使能信号,高电平有效,低电平时计数器状态保持不变
-   input PE,				//同步置数,高电平有效
+   input PE,		//同步置数,高电平有效
    input CR,         	//异步清零端,高电平有效
-   input [7:0] D_H,			//同步置数数据 时
-   input [7:0] D_M,			//同步置数数据 分
-   input [7:0] D_S,			//同步置数数据 秒
+   input [7:0] D_H,	//同步置数数据 时
+   input [7:0] D_M,	//同步置数数据 分
+   input [7:0] D_S,	//同步置数数据 秒
 	
    output  [7:0] Q_H,  //计数输出端 时
    output  [7:0] Q_M,  //计数输出端 分
