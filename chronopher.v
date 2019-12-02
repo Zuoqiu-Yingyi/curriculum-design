@@ -1,4 +1,4 @@
-/** 
+/**已测试
  * 每逢59分51秒、53秒、57秒时输出500Hz低音频信号，59分59秒时输出1kHz高音频信号，输出音频信号的持续时间为1秒
  */
 
@@ -7,7 +7,7 @@ module chronopher (  //报时器
    input CP_1K,         //1KHz方波
    input[7:0] TIME_M,   //分钟输入
    input[7:0] TIME_S,   //秒输入
-   output reg AUDIO     //音频信号输出
+   output AUDIO     //音频信号输出
 );
 
    parameter LOW = 0;
@@ -29,12 +29,14 @@ module chronopher (  //报时器
       end
    end
 
-   always @ (TIME_S, TIME_M, CE) begin //状态转移
-      case (CE)
-         2'b01: AUDIO <= CP_500;
-         2'b10: AUDIO <= CP_1K;
-         default: AUDIO <= LOW;
-      endcase
-   end
+   assign AUDIO = CE[0] & CP_500 | CE[1] & CP_1K;  //选择输出的频率
+
+   // always @ (TIME_S, TIME_M, CE) begin //状态转移
+   //    case (CE)
+   //       2'b01: AUDIO <= CP_500;
+   //       2'b10: AUDIO <= CP_1K;
+   //       default: AUDIO <= LOW;
+   //    endcase
+   // end
 
 endmodule

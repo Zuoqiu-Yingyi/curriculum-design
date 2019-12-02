@@ -1,4 +1,4 @@
-/** 
+/**已测试
  * 增加闹钟功能，最长闹铃时间为1分钟。闹钟的闹铃时刻可任意设置（只要求对时、分设置）。
  * 设置一个停止闹铃的按键，可以停止闹铃输出。 
  */
@@ -16,15 +16,16 @@ module alarm ( //闹钟
    input [7:0] D_M,  //置数数据输出,分
    input [7:0] D_S,  //置数数据输出,秒
 
+   output reg [7:0] BFM_H,   //闹钟寄存器,时
+   output reg [7:0] BFM_M,   //闹钟寄存器,分
+   output reg [7:0] BFM_S,   //闹钟寄存器,秒
+
    output reg CE     //使能,铃声控制信号
 );
 
    wire TC_counter;  //计数器的进位输出信号
    wire TRGI_counter;//计数器触发信号
 
-   reg [7:0] BFM_H = 8'h00;   //寄存器,时
-   reg [7:0] BFM_M = 8'h00;   //寄存器,分
-   reg [7:0] BFM_S = 8'h00;   //寄存器,秒
 
    reg CE_counter = 1'b0;  //计数器的使能信号
    reg CR_counter = 1'b1;  //计数器异步清零信号
@@ -34,7 +35,12 @@ module alarm ( //闹钟
    parameter HIGH = 1'b1;
    parameter MOD_60 = 8'h59;
 
-   initial CE = 0;
+   initial begin
+      CE = 0;
+      BFM_H = 8'h00;
+      BFM_M = 8'h00;
+      BFM_S = 8'h00;
+   end
 
    assign TRGI_counter = {TIME_H, TIME_M, TIME_S} == {BFM_H, BFM_M, BFM_S};
 
