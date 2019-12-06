@@ -8,7 +8,7 @@ module Keshe1 (input CP,
                input MD,
                input SU,
                input SD,
-               input CP_TEST,
+            //    input CP_TEST,
                output [7:0] Q_H,  //计数输出
                output [7:0] Q_M,  //计数输出
                output [7:0] Q_S,  //计数输出
@@ -54,16 +54,16 @@ module Keshe1 (input CP,
     .minute(Q_M),
     .second(Q_S),
     .CP(CLK10K),
-    .codeout(codeout1)
-    // .seg(seg1)
+    .codeout(codeout1),
+    .seg(seg1)
     );
     print pp2(
     .hour(D_H),
     .minute(D_M),
     .second(D_S),
     .CP(CLK10K),
-    .codeout(codeout2)
-    // .seg(seg2)
+    .codeout(codeout2),
+    .seg(seg2)
     );
 
     /* 报时模块 */
@@ -77,8 +77,8 @@ module Keshe1 (input CP,
 
     /* 校时模块 */
     timing timing(
-//     .CP_1(CLK1hz),
-    .CP_1(CP_TEST),
+    .CP_1(CLK1hz),
+    // .CP_1(CP_TEST),
     .PE(PE),
     .H_UP(HU),
     .H_DOWN(HD),
