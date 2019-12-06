@@ -2,10 +2,12 @@ module print(
 	input [7:0]hour,minute,second,
 	input CP,
 	output reg [6:0]codeout,
-	output wire [6:0]codeout1,codeout2,codeout3,codeout4,codeout5,codeout6
+	output reg [7:0]seg
 );
 wire [3:0]hour0,hour1,min0,min1,sec0,sec1;
-reg [7:0]seg;reg [2:0]n;
+
+reg [2:0]n;
+wire [6:0]codeout1,codeout2,codeout3,codeout4,codeout5,codeout6;
 
 assign hour0[3:0]=hour[7:4];
 assign hour1[3:0]=hour[3:0];
