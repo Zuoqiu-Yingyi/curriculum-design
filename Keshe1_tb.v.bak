@@ -1,0 +1,13 @@
+module Keshe1_tb;
+   reg CP;
+   reg CE;
+   wire [[:0] D_M;
+
+   initial begin
+      #0 CP = 0;
+         CE = 0;
+      forever begin
+         #10 CP = ~CP;
+      end
+   end
+endmodule

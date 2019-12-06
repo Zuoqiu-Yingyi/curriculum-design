@@ -1,6 +1,6 @@
 module print(
 	input [7:0]hour,minute,second,
-	input CP_1Mhz,
+	input CP,
 	output reg [6:0]codeout,
 	output wire [6:0]codeout1,codeout2,codeout3,codeout4,codeout5,codeout6
 );
@@ -21,7 +21,7 @@ Decoder47 Decoder4(.codeout(codeout4),.indec(min1));
 Decoder47 Decoder5(.codeout(codeout5),.indec(sec0));
 Decoder47 Decoder6(.codeout(codeout6),.indec(sec1));
 
-always@(posedge CP_1Mhz)
+always@(posedge CP)
 begin
 	if(n==3'b101)
 			n<=3'b000;
@@ -29,7 +29,7 @@ begin
 			n<=n+1;
 end
 
-always@(posedge CP_1Mhz)
+always@(posedge CP)
 begin
 	case(n)
 	3'b000:begin seg<=8'b00000001;codeout<=codeout6; end
