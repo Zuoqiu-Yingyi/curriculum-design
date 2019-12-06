@@ -7,7 +7,7 @@ module frequency_divider (    //分频器
    output CP_10,
    output CP_1
 );
-   wire CP_1k, CP_2k;
+   wire CP_1K, CP_2K;
    
    parameter HIGH = 1;
    parameter MOD_5 = 8'h04;
@@ -42,7 +42,7 @@ module frequency_divider (    //分频器
 
    square_wave_generator sqw_2K_1K( //将2KHz的脉冲波转化为1KHz的方波
       .CP(CP_2K),       //2K脉冲波输入
-      .SQW(CP_1k_SQW)   //1K方波输出
+      .SQW(CP_1K_SQW)   //1K方波输出
    );
 
    counter_8421_2b	FD1_10K_1K( //分频 10KHz->1KHz
