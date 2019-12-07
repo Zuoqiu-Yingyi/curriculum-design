@@ -26,13 +26,12 @@ Decoder47 Decoder4(.codeout(codeout4),.indec(min1));
 Decoder47 Decoder5(.codeout(codeout5),.indec(sec0));
 Decoder47 Decoder6(.codeout(codeout6),.indec(sec1));
 
-// always@(posedge CP)
-// begin
-// 	if(n==3'b101)
-// 			n<=3'b000;
-// 	else
-// 			n<=n+1;
-// end
+always@(posedge CP) begin
+	// if(n==3'b101)
+	// 		n<=3'b000;
+	// else
+	n <= n+1;
+end
 
 always@(posedge CP)
 begin
