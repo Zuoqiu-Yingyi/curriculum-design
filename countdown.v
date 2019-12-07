@@ -32,14 +32,14 @@ module countdown (
    wire TC_S, TC_M, TC_H;
    // parameter 
 
-   always @ (Q_H, Q_M, Q_S, CE, PE, CP) begin
+   always @ (Q_H, Q_M, Q_S, CE, PE) begin
       if (PE) begin
          TC <= 1'b0;
       end
-      else if ({Q_H, Q_M, Q_S} == 24'h00_00_00 && CE_counter == 1'b0 && CE == 1'b0) begin
-         TC <= 1'b0;
-      end
-      else if ({Q_H, Q_M, Q_S} == 24'h00_00_00 && CE_counter == 1'b1) begin
+      // else if ({Q_H, Q_M, Q_S} == 24'h00_00_00 && CE_counter == 1'b0 && CE == 1'b0) begin
+      //    TC <= 1'b0;
+      // end
+      else if ({Q_H, Q_M, Q_S} == 24'h00_00_00) begin
          TC <= 1'b1;
          CE_counter <= 1'b0;
       end
@@ -52,7 +52,7 @@ module countdown (
       .CP(CP),          //时钟信号
       .CE(CE_counter),  //使能信号,高电平有效,低电平时计数器状态保持不变
       .UP(LOW),         //正计数端,高电平有效
-      .PE(PE),  //异步置位信号
+      .PE(PE),          //异步置位信号
       .D(D_S),          //异步置数数据
       .MAX(MOD_60),     //MAX数据(最大值)输入端
       .Q(Q_S),          //数据输出端
@@ -63,7 +63,7 @@ module countdown (
       .CP(~TC_S),       //时钟信号
       .CE(CE_counter),  //使能信号,高电平有效,低电平时计数器状态保持不变
       .UP(LOW),         //正计数端,高电平有效
-      .PE(PE),  //异步置位信号
+      .PE(PE),          //异步置位信号
       .D(D_M),          //异步置数数据
       .MAX(MOD_60),     //MAX数据(最大值)输入端
       .Q(Q_M),          //数据输出端
@@ -74,7 +74,7 @@ module countdown (
       .CP(~TC_M),       //时钟信号
       .CE(CE_counter),  //使能信号,高电平有效,低电平时计数器状态保持不变
       .UP(LOW),         //正计数端,高电平有效
-      .PE(PE),  //异步置位信号
+      .PE(PE),          //异步置位信号
       .D(D_H),          //异步置数数据
       .MAX(MOD_24),     //MAX数据(最大值)输入端
       .Q(Q_H),          //数据输出端
