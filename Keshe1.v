@@ -24,6 +24,8 @@ module Keshe1 (input CP,
                );
     wire[6:0]codeout1, codeout2;
     wire[7:0]seg1,seg2;
+
+    parameter HIGH = 1'b1;
     
     /* 调用分频模块 */
     frequency_divider d1(
@@ -37,7 +39,7 @@ module Keshe1 (input CP,
 
     /* 调用计时模块 */
     timer t1(.CP(CLK1hz),
-    .CE(CE),
+    .CE(HIGH),
     .PE(~CE),
     .CR(CR),
     .D_H(D_H),
