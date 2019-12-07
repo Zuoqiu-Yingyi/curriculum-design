@@ -12,7 +12,7 @@ module Keshe1 (input CP,
                output [7:0] Q_H,  //计数输出
                output [7:0] Q_M,  //计数输出
                output [7:0] Q_S,  //计数输出
-               output [6:0] codeout,
+               output [7:0] codeout,
                output [7:0] D_H,
                output [7:0] D_M,
                output [7:0] D_S,
@@ -22,7 +22,7 @@ module Keshe1 (input CP,
                output [7:0] seg,
                output AUDIO
                );
-    wire[6:0]codeout1, codeout2;
+    wire[7:0]codeout1, codeout2;
     wire[7:0]seg1,seg2;
 
     parameter HIGH = 1'b1;

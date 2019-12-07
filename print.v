@@ -1,7 +1,7 @@
 module print(
 	input [7:0]hour,minute,second,
 	input CP,
-	output reg [6:0]codeout,
+	output reg [7:0]codeout,
 	output reg [7:0]seg
 );
 wire [3:0]hour0,hour1,min0,min1,sec0,sec1;

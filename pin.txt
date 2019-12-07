@@ -11,6 +11,7 @@ MU,	PIN_77
 SD,	PIN_80
 SU,	PIN_83	
 AUDIO,   PIN_59
+codeout[7], PIN_110
 codeout[6],	PIN_99	
 codeout[5],	PIN_100
 codeout[4],	PIN_101
