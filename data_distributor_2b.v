@@ -1,0 +1,30 @@
+/* 数据分配器(2位) */
+module data_distributor_2b(
+   input [1:0] FUN,    //选择输出端
+   input [1:0] IN,     //信号输入
+   output reg [1:0] OUT_1, //信号输出1
+   output reg [1:0] OUT_2, //信号输出2
+   output reg [1:0] OUT_3  //信号输出3
+);
+   initial begin
+      OUT_1 = 2'b00;
+      OUT_2 = 2'b00;
+      OUT_3 = 2'b00;
+   end
+   always @ (FUN, IN) begin
+      OUT_1 <= 2'b00;
+      OUT_2 <= 2'b00;
+      OUT_3 <= 2'b00;      
+      case  (FUN)
+         2'b01: OUT_1 <= IN;
+         2'b10: OUT_2 <= IN;
+         2'b11: OUT_3 <= IN;
+			default begin
+				OUT_1 <= 2'b00;
+				OUT_2 <= 2'b00;
+				OUT_3 <= 2'b00;
+			end
+      endcase
+   end
+
+endmodule

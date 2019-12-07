@@ -20,7 +20,7 @@ module alarm ( //闹钟
    output reg [7:0] BFM_M,   //闹钟寄存器,分
    output reg [7:0] BFM_S,   //闹钟寄存器,秒
 
-   output reg CE     //使能,铃声控制信号
+   output reg TC     //使能,铃声控制信号
 );
 
    wire TC_counter;  //计数器的进位输出信号
@@ -29,14 +29,13 @@ module alarm ( //闹钟
 
    reg CE_counter = 1'b0;  //计数器的使能信号
    reg CR_counter = 1'b1;  //计数器异步清零信号
-   reg CR = 1'b0; //计时器清零信号
 
    parameter LOW = 1'b0;
    parameter HIGH = 1'b1;
    parameter MOD_60 = 8'h59;
 
    initial begin
-      CE = 0;
+      TC = 0;
       BFM_H = 8'h00;
       BFM_M = 8'h00;
       BFM_S = 8'h00;
@@ -44,7 +43,7 @@ module alarm ( //闹钟
 
    assign TRGI_counter = {TIME_H, TIME_M, TIME_S} == {BFM_H, BFM_M, BFM_S};
 
-   always @ (PE) begin  //置数
+   always @ (PE, D_H, D_M, D_S) begin  //置数
       if (PE) begin
          BFM_H <= D_H;
          BFM_M <= D_M;
@@ -73,17 +72,17 @@ module alarm ( //闹钟
          /* 计数器置零,不再工作,关闭响铃 */
          CR_counter <= HIGH;
          CE_counter <= LOW;
-         CE <= LOW;
+         TC <= LOW;
       end
       else if (TRGI_counter) begin  //闹铃响
          CR_counter <= LOW;  //计数器不再清零
          CE_counter <= HIGH;  //计数器开始工作
-         CE <= HIGH;          //闹钟响铃
+         TC <= HIGH;          //闹钟响铃
       end
       else begin  //响铃一分钟,关闭响铃
          CR_counter <= HIGH; 
          CE_counter <= LOW;
-         CE <= LOW;
+         TC <= LOW;
       end
    end
 

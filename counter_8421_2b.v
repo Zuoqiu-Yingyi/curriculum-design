@@ -73,12 +73,10 @@ module counter_8421_2b (
 		end
 		else if (PE) begin	//异步置数
 			Q <= D;
-			// if (D >= 100) begin
-				// Q_NS <= 8'b0000_0000;
-			// end
-			// else begin
-				// Q_NS <= {D / 10, D % 10};
-			// end
+			if (D == MAX && UP || D == 8'h00 && ~UP)
+				TC <= 1'b1;
+			else
+				TC <= 1'b0;
 		end
 		else begin
 			Q	<= Q_NS;

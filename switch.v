@@ -5,12 +5,12 @@ module switch (
    input ON,   //上升沿触发"开"状态
    input OFF,  //上升沿触发"关"状态
    input D,    //开关入口
-   input Q     //开关出口
+   output Q     //开关出口
 );
 
    reg state = 0;
 
-   always @ (negedge ON, negedge OFF) begin
+   always @ (posedge ON, posedge OFF) begin
       if (OFF) begin
          state <= 1'b0;
       end
