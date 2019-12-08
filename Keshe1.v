@@ -16,6 +16,7 @@ module Keshe1 (
   // output TC_H, output TC_M, output TC_S,     //进位输出
   output reg [7:0] codeout, //译码管最终译码
   output reg [7:0] seg,     //选位
+  output COLON,         //冒号
   output AUDIO          //蜂鸣器
 );
 		wire [7:0] Q_H, Q_M, Q_S; //时钟模块timer数据输出,接数据选择器,pp1与闹钟时间输入
@@ -40,6 +41,11 @@ module Keshe1 (
 
  	  assign AUDIO = ~CS & ((TC_alarm | TC_countdown) & AUDIO_2)|(~(TC_alarm | TC_countdown) & AUDIO_1);
 
+    /* 两个冒号闪烁 */
+    square_wave_generator blink (
+      .CP(CLK1hz),
+      .SQW(COLON)
+    );
 
     /* 导入导出信号选择 */
     data_distributor_2b menu(

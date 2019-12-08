@@ -12,7 +12,8 @@ SD,	PIN_89
 SU,	PIN_98
 LEAD, PIN_80
 EXPORT,  PIN_83
-AUDIO,   PIN_128
+AUDIO,   PIN_59
+COLON,   PIN_111
 codeout[7], PIN_110
 codeout[6],	PIN_99
 codeout[5],	PIN_100
