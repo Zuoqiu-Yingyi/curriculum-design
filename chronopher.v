@@ -18,6 +18,7 @@ module chronopher (  //报时器
          case (TIME_S)
             8'h51: CE <= 2'b01;
             8'h53: CE <= 2'b01;
+            8'h55: CE <= 2'b01;
             8'h57: CE <= 2'b01;
             8'h59: CE <= 2'b10;
             default: CE <= 2'b00;
