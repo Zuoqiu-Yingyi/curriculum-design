@@ -14,8 +14,8 @@ module Keshe1 (
   input EXPORT,  //导出按钮
   // output [7:0] Q_H, output [7:0] Q_M, output [7:0] Q_S,  //时钟输出
   // output TC_H, output TC_M, output TC_S,     //进位输出
-  output reg [7:0] codeout, //译码管最终译码
-  output reg [7:0] seg,     //选位
+  output [7:0] codeout, //译码管最终译码
+  output [7:0] seg,     //选位
   output COLON,         //冒号
   output AUDIO          //蜂鸣器
 );
@@ -70,7 +70,7 @@ module Keshe1 (
     /* 调用分频模块 */
     frequency_divider d1(
       .CP_50M(CP),            //输入试验箱50Mhz
-      .CP_1M(CLK1M),          //得到1Mhz
+      // .CP_1M(CLK1M),          //得到1Mhz
       .CP_500_SQW(SCLK500hz), //得到500hz方波
       .CP_1K_SQW(SCLK1000hz), //得到1000hz方波
       .CP_10K(CLK10K),        //得到10Khz
@@ -206,12 +206,6 @@ module Keshe1 (
     );
 	 
     switch s1(
-      .ON(start),
-      .OFF(pause),
-      .D(HIGH),
-      .Q(CE_countdown)
-    );
-    switch s2(
       .ON(&{S1, S0}),
       .OFF(start),
       .D(HIGH),
@@ -236,16 +230,17 @@ module Keshe1 (
       .TC(TC_countdown)   //时间到触发
     );
 
+    /* 数码管显示选择器 */
+    digital_tube_display_selector selector1(
+      .FUN({S1, S0}),
+      .codeout0(codeout0),
+      .codeout1(codeout1),
+      .codeout2(codeout2),
+      .seg0(seg0),
+      .seg1(seg1),
+      .seg2(seg2),
+      .codeout(codeout), //译码管最终译码
+      .seg(seg)      //选位
+    );
 
-    always@(*)
-    begin
-        case({S1,S0})
-        2'b00:begin codeout<=codeout0;seg<=seg0;end
-        2'b01:begin codeout<=codeout1;seg<=seg1;end
-        2'b10:begin codeout<=codeout1;seg<=seg1;end
-        2'b11:begin codeout<=codeout2;seg<=seg2;end
-        default:seg=8'b00000000;
-        endcase
-    end
-    
 endmodule
