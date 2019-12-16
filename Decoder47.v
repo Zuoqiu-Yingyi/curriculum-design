@@ -1,7 +1,9 @@
-module Decoder47(codeout,indec);     //4-7译码管 8421码转为七段译码管显示
-  input[3:0] indec;
-  output[7:0] codeout;
-  reg[7:0] codeout;
+module Decoder47( //4-8译码器 8421码转为七段译码管显示
+  input      [3:0] indec,   //1位8421BCD码输入
+  output reg [7:0] codeout  //8位数码管信号输出
+);
+
+  initial codeout = 8'b0000_0000;
 
   always@(indec)
   begin

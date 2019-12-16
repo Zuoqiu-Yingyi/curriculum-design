@@ -1,10 +1,12 @@
 /**已测试
+ * 校时模块
+ * TODO:
  * 校时功能:时、分校时功能，校时输入脉冲频率1Hz。
  * 校时时:      异步置数位接timer模块的计数输出端
  * 设置闹钟时:  时钟时异步置数位接alarm模块的寄存器端
  */
 
-module timing (   //校时模块
+module timing (
    input CP_1,    //时钟脉冲 1Hz
    input CR,      //清零
 
@@ -74,4 +76,4 @@ module timing (   //校时模块
 	);
 
 
-endmodule
+endmodule   //timing    校时模块

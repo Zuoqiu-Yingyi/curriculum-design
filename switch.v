@@ -1,11 +1,11 @@
 /**
  * 开关模块, 一个input上升沿导通,另一个input上升沿关断
  */
-module switch (
+module switch (   //开关模块
    input ON,   //上升沿触发"开"状态
    input OFF,  //上升沿触发"关"状态
-   input D,    //开关入口
-   output Q     //开关出口
+   input D,    //信号输入
+   output Q    //信号输出
 );
 
    reg state = 0;
@@ -21,4 +21,4 @@ module switch (
 
    assign Q = state & D;
 
-endmodule
+endmodule   //switch 开关模块

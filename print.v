@@ -1,9 +1,12 @@
+/* 显示模块 */
 module print(
-	input [7:0]hour,minute,second,
-	input CP,
-	input [1:0] NUM,	//功能编号
-	output reg [7:0]codeout,
-	output reg [7:0]seg
+	input [7:0] hour,		//5:4两位所显示数据的输入
+	input [7:0] minute,	//3:2两位所显示数据的输入
+	input [7:0] second,	//1:0两位所显示数据的输入
+	input CP,				//触发位选信号切换的时钟脉冲
+	input [1:0] NUM,		//最左位数码管显示的功能编号
+	output reg [7:0] codeout,	//每一组位选信号所对应的数码管信号输出
+	output reg [7:0] seg			//位选信号输出
 );
 wire [3:0]hour0,hour1,min0,min1,sec0,sec1;
 
@@ -48,4 +51,4 @@ begin
 	endcase
 end
 
-endmodule
+endmodule	//print	显示模块

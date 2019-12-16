@@ -1,12 +1,13 @@
 /**已测试
- * 闹铃信号为500Hz和1kHz的方波型号，两种信号交替输出，均持续1秒
+ * 闹铃音频发生器
+ * TODO: 闹铃信号为500Hz和1kHz的方波型号，两种信号交替输出，均持续1秒
  */
 module alarm_sound_generator (   //闹铃音频发生器
    input CE,         //使能信号,高电平有效
    input CP_1,       //1Hz脉冲输入
    input CP_500,     //500Hz方波输入
    input CP_1K,      //1KHz方波输入
-   output AUDIO  //音频输出
+   output AUDIO      //音频输出
 );
    reg temp = 0;
 
@@ -32,4 +33,4 @@ module alarm_sound_generator (   //闹铃音频发生器
    //    end
    // end
 
-endmodule
+endmodule   //alarm_sound_generator 闹铃音频发生器

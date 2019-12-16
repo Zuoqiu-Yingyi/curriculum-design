@@ -1,4 +1,8 @@
-module frequency_divider (    //分频器
+/**已测试
+ * 分频器
+ * TODO: 1KHz方波, 500Hz方波, 1Hz脉冲波
+ */
+module frequency_divider (
    input CP_50M,
    output CP_1M,
    output CP_10K,
@@ -74,4 +78,4 @@ module frequency_divider (    //分频器
       .TC(CP_1) //进位输出端
    );
 
-endmodule
+endmodule   //frequency_divider  分频器

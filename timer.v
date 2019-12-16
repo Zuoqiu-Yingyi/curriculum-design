@@ -1,3 +1,4 @@
+/* 时钟模块 */
 module timer (
    input CP,         	//时钟信号
    input CE,         	//使能信号,高电平有效,低电平时计数器状态保持不变
@@ -56,4 +57,4 @@ module timer (
       .TC(TC_H) 	      //进位输出端
 	);
 
-endmodule
+endmodule   //timer     时钟模块

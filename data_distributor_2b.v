@@ -2,6 +2,7 @@
 module data_distributor_2b(
    input [1:0] FUN,    //选择输出端
    input [1:0] IN,     //信号输入
+   
    output reg [1:0] OUT_1, //信号输出1
    output reg [1:0] OUT_2, //信号输出2
    output reg [1:0] OUT_3  //信号输出3
@@ -27,4 +28,4 @@ module data_distributor_2b(
       endcase
    end
 
-endmodule
+endmodule   //data_distributor_2b   数据分配器(2位)

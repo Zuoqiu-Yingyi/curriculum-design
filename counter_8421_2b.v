@@ -1,5 +1,5 @@
 /**已测试
- * 
+ * 2位8421BCD码可调进制异步置数异步清零可逆计数器
  */
 module counter_8421_2b (
    input CP,         	//时钟信号
@@ -83,4 +83,4 @@ module counter_8421_2b (
 			TC	<= TC_NS;
 		end
 	end
-endmodule
+endmodule	//counter_8421_2b	2位8421BCD计数器

@@ -1,14 +1,14 @@
-/* 数码管显示选择器 */
+/* 数码管显示信号选择器 */
 module digital_tube_display_selector(
-   input [1:0] FUN,
-   input [7:0] codeout0,
-   input [7:0] codeout1,
-   input [7:0] codeout2,
-   input seg0,
-   input seg1,
-   input seg2,
-   output reg [7:0] codeout, //译码管最终译码
-   output reg [7:0] seg      //选位
+   input [1:0] FUN,        //模式选择信号
+   input [7:0] codeout0,   //数码管信号0输入
+   input [7:0] codeout1,   //数码管信号1输入
+   input [7:0] codeout2,   //数码管信号2输入
+   input seg0,    //位选信号0输入
+   input seg1,    //位选信号1输入
+   input seg2,    //位选信号2输入
+   output reg [7:0] codeout, //数码管最终控制信号
+   output reg [7:0] seg      //位选信号
 );
    initial begin
       codeout = 8'b0000_0000;
@@ -26,4 +26,4 @@ module digital_tube_display_selector(
       endcase
    end
 
-endmodule
+endmodule   //digital_tube_display_selector  数码管显示信号选择器

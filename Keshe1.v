@@ -1,3 +1,4 @@
+/* 顶层文件 */
 module Keshe1 (
   input CP,  //输入实验箱50mhz赫兹
   // input PE,    //高电平时校准时间
@@ -35,11 +36,31 @@ module Keshe1 (
 
     wire CLK1M, SCLK500hz, SCLK1000hz, CLK10K, CLK1hz;
     
+    wire HD_timing1, HU_timing1;
+    wire MD_timing1, MU_timing1;
+    wire SD_timing1, SU_timing1;
+
+    wire HD_timing1_1, HU_timing1_1;
+    wire MD_timing1_1, MU_timing1_1;
+    wire SD_timing1_1, SU_timing1_1;
+    wire HD_timing1_2, HU_timing1_2;
+    wire MD_timing1_2, MU_timing1_2;
+    wire SD_timing1_2, SU_timing1_2;
+
+    wire HD_timing2, HU_timing2;
+    wire MD_timing2, MU_timing2;
+    wire SD_timing2, SU_timing2;
 
     parameter HIGH = 1'b1;
 	  parameter LOW = 1'b0;
 
  	  assign AUDIO = ~CS & ((TC_alarm | TC_countdown) & AUDIO_2)|(~(TC_alarm | TC_countdown) & AUDIO_1);
+    assign HD_timing1 = HD_timing1_1 | HD_timing1_2;
+    assign HU_timing1 = HU_timing1_1 | HU_timing1_2;
+    assign MD_timing1 = MD_timing1_1 | MD_timing1_2;
+    assign MU_timing1 = MU_timing1_1 | MU_timing1_2;
+    assign SD_timing1 = SD_timing1_1 | SD_timing1_2;
+    assign SU_timing1 = SU_timing1_1 | SU_timing1_2;
 
     /* 两个冒号闪烁 */
     square_wave_generator blink (
@@ -47,13 +68,38 @@ module Keshe1 (
       .SQW(COLON)
     );
 
-    /* 导入导出信号选择 */
+    /* 导入导出信号分配 */
     data_distributor_2b menu(
       .FUN({S1, S0}),
       .IN({LEAD, EXPORT}),
       .OUT_1({LEAD_timer, EXPORT_timer}),
       .OUT_2({LEAD_alarm, EXPORT_alarm}),
       .OUT_3({start, pause})
+    );
+
+    /* 时间调整信号分配 */
+    data_distributor_2b hour_distribute(
+      .FUN({S1, S0}),
+      .IN({HD, HU}),
+      .OUT_1({HD_timing1_1, HU_timing1_1}),
+      .OUT_2({HD_timing1_2, HU_timing1_2}),
+      .OUT_3({HD_timing2, HU_timing2})
+    );
+    /* 时间调整信号分配 */
+    data_distributor_2b minute_distribute(
+      .FUN({S1, S0}),
+      .IN({MD, MU}),
+      .OUT_1({MD_timing1_1, MU_timing1_1}),
+      .OUT_2({MD_timing1_2, MU_timing1_2}),
+      .OUT_3({MD_timing2, MU_timing2})
+    );
+    /* 时间调整信号分配 */
+    data_distributor_2b second_distribute(
+      .FUN({S1, S0}),
+      .IN({SD, SU}),
+      .OUT_1({SD_timing1_1, SU_timing1_1}),
+      .OUT_2({SD_timing1_2, SU_timing1_2}),
+      .OUT_3({SD_timing2, SU_timing2})
     );
 
     /* 导入导出数据选择 */
@@ -131,27 +177,27 @@ module Keshe1 (
 
     /* 时间设置模块 */
     timing timing1(
-      .CP_1(CLK1hz),
+        .CP_1(CLK1hz),
 
-      .CR(CR),
+        .CR(CR),
 
-      .PE(EXPORT_timer | EXPORT_alarm),
-      .D_H(S_H),
-      .D_M(S_M),
-      .D_S(S_S),
+        .PE(EXPORT_timer | EXPORT_alarm),
+        .D_H(S_H),
+        .D_M(S_M),
+        .D_S(S_S),
 
-      .H_UP(HU),
-      .H_DOWN(HD),
+        .H_UP(HU_timing1),
+        .H_DOWN(HD_timing1),
 
-      .M_UP(MU),
-      .M_DOWN(MD),
+        .M_UP(MU_timing1),
+        .M_DOWN(MD_timing1),
 
-      .S_UP(SU),
-      .S_DOWN(SD),
+        .S_UP(SU_timing1),
+        .S_DOWN(SD_timing1),
 
-      .Q_H(D_H),
-      .Q_M(D_M),
-      .Q_S(D_S)
+        .Q_H(D_H),
+        .Q_M(D_M),
+        .Q_S(D_S)
     );
 	 
     
@@ -185,24 +231,25 @@ module Keshe1 (
       .AUDIO(AUDIO_2)  //音频输出
     );
 
-	  /* 倒计时设置时间模块 */
+    /* 倒计时设置时间模块 */
     timing timing2(
-      .CP_1(CLK1hz),
+        .CP_1(CLK1hz),
 
-      .CR(CR),
-      //.PE(PE),
-      .H_UP(HU),
-      .H_DOWN(HD),
-      .M_UP(MU),
-      .M_DOWN(MD),
-      .S_UP(SU),
-      .S_DOWN(SD),
-      /*.D_H(DHnew),
-      .D_M(DMnew),
-      .D_S(DSnew),*/
-      .Q_H(N_H),
-      .Q_M(N_M),
-      .Q_S(N_S)
+        .CR(CR),
+        .PE(LOW),
+
+        .H_UP(HU_timing2),
+        .H_DOWN(HD_timing2),
+        .M_UP(MU_timing2),
+        .M_DOWN(MD_timing2),
+        .S_UP(SU_timing2),
+        .S_DOWN(SD_timing2),
+        /*.D_H(DHnew),
+        .D_M(DMnew),
+        .D_S(DSnew),*/
+        .Q_H(N_H),
+        .Q_M(N_M),
+        .Q_S(N_S)
     );
 	 
     switch s1(
@@ -243,4 +290,4 @@ module Keshe1 (
       .seg(seg)      //选位
     );
 
-endmodule
+endmodule //Keshe1 顶层文件
